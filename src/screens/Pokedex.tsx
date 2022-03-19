@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { View, Text } from "react-native";
 import { getPokemonsApi, getPokemonDetailsByUrlApi } from "../api/pokemon";
 
+import { Pokemon } from "../models/pokemon";
+
 export default function Pokedex() {
-  const [pokemons, setPokemons] = useState<any>([]);
+  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
   useEffect(() => {
     (async () => {
@@ -14,7 +16,7 @@ export default function Pokedex() {
   const loadPokemons = async () => {
     const response: any = await getPokemonsApi();
 
-    let pokemonsArray: any = [];
+    let pokemonsArray: Pokemon[] = [];
     for await (const pokemon of response.results) {
       const pokemonDetails = await getPokemonDetailsByUrlApi(pokemon.url);
       pokemonsArray.push({
