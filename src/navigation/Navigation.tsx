@@ -3,14 +3,14 @@ import Account from "../screens/Account";
 import Pokedex from "../screens/Pokedex";
 import Favorite from "../screens/Favorite";
 
-const Tab = createBottomTabNavigator();
+const { Navigator, Screen } = createBottomTabNavigator();
 
 export default function Navigation() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Account" component={Account} />
-      <Tab.Screen name="Pokedex" component={Pokedex} />
-      <Tab.Screen name="Favorite" component={Favorite} />
-    </Tab.Navigator>
+    <Navigator>
+      <Screen name="Account" component={Account} />
+      <Screen name="Pokedex" component={Pokedex} />
+      <Screen name="Favorite" component={Favorite} />
+    </Navigator>
   );
 }
