@@ -5,6 +5,7 @@ import { Pokemon } from "../models/pokemon";
 
 export const usePokemons = () => {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [nextUrl, setNextUrl] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -13,7 +14,8 @@ export const usePokemons = () => {
   }, []);
 
   const loadPokemons = async () => {
-    const response: any = await getPokemonsApi();
+    const response: any = await getPokemonsApi(nextUrl);
+    setNextUrl(response.next);
 
     let pokemonsArray: Pokemon[] = [];
     for await (const pokemon of response.results) {
@@ -30,5 +32,11 @@ export const usePokemons = () => {
     setPokemons([...pokemons, ...pokemonsArray]);
   };
 
-  return { pokemons };
+  const loadMore = () => {
+    loadPokemons();
+  };
+
+  const isNext = nextUrl;
+
+  return { pokemons, loadMore, isNext };
 };
