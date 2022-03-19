@@ -1,7 +1,10 @@
+import { PokemonTypeColors } from "./pokemonType";
+
 export interface Pokemon {
   id: number;
   name: string;
   image: string;
   order: number;
-  type: string;
+  type: PokemonTypeColors;
+  color?: string;
 }

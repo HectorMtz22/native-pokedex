@@ -22,7 +22,8 @@ export default function Navigation() {
         name="Pokedex"
         component={Pokedex}
         options={{
-          tabBarLabel: "",
+          title: "",
+          headerTransparent: true,
           // headerTitle: "Pokedex",
           tabBarIcon: () => renderPokeball(),
         }}

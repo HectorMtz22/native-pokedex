@@ -27,7 +27,6 @@ export const usePokemons = () => {
       });
     }
 
-    console.log(pokemonsArray);
     setPokemons([...pokemons, ...pokemonsArray]);
   };
 
