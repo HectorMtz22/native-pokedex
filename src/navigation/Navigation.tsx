@@ -14,20 +14,24 @@ export default function Navigation() {
         name="Favorite"
         component={Favorite}
         options={{
-          tabBarLabel: "Favoritos",
+          title: "Favoritos",
           tabBarIcon: (props) => <Icon name="heart" {...props} />,
         }}
       />
       <Screen
         name="Pokedex"
         component={Pokedex}
-        options={{ tabBarLabel: "", tabBarIcon: () => renderPokeball() }}
+        options={{
+          tabBarLabel: "",
+          // headerTitle: "Pokedex",
+          tabBarIcon: () => renderPokeball(),
+        }}
       />
       <Screen
         name="Account"
         component={Account}
         options={{
-          tabBarLabel: "Mi cuenta",
+          title: "Mi cuenta",
           tabBarIcon: (props) => <Icon name="user" {...props} />,
         }}
       />
