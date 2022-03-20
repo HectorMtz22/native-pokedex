@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { ScrollView } from "react-native";
 import Header from "../components/Pokemon/Header";
+import Stats from "../components/Pokemon/Stats";
 import Type from "../components/Pokemon/Type";
 import usePokemonDetail from "../hooks/usePokemonDetail";
 
@@ -19,6 +20,7 @@ export default function Pokemon(props: any) {
       <StatusBar style="light" />
       <Header {...pokemon} />
       <Type types={pokemon.type} />
+      <Stats stats={pokemon.stats} />
     </ScrollView>
   );
 }
