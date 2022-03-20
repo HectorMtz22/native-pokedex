@@ -4,7 +4,7 @@ import { Pokemon } from "../../models/pokemon";
 import getColorByPokemonType from "../../utils/getColorByPokemonType";
 
 export default function Header({ name, order, image, type }: Pokemon) {
-  const color = getColorByPokemonType(type);
+  const color = getColorByPokemonType(type[0]);
   const number = `${order}`.padStart(3, "0");
   return (
     <>

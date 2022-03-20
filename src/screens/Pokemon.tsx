@@ -1,5 +1,6 @@
 import { Text, ScrollView } from "react-native";
 import Header from "../components/Pokemon/Header";
+import Type from "../components/Pokemon/Type";
 import usePokemonDetail from "../hooks/usePokemonDetail";
 
 export default function Pokemon(props: any) {
@@ -15,7 +16,7 @@ export default function Pokemon(props: any) {
   return (
     <ScrollView>
       <Header {...pokemon} />
-      <Text>{pokemon.name}</Text>
+      <Type types={pokemon.type} />
     </ScrollView>
   );
 }
