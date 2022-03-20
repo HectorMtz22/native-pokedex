@@ -1,4 +1,5 @@
-import { View, Text } from "react-native";
+import { Text, ScrollView } from "react-native";
+import Header from "../components/Pokemon/Header";
 import usePokemonDetail from "../hooks/usePokemonDetail";
 
 export default function Pokemon(props: any) {
@@ -7,14 +8,14 @@ export default function Pokemon(props: any) {
     route: { params },
   } = props;
   const { pokemon, loading, error } = usePokemonDetail(params);
-  console.log(pokemon);
 
   if (!pokemon || loading) return null;
   if (error) navigation.goBack();
 
   return (
-    <View>
+    <ScrollView>
+      <Header {...pokemon} />
       <Text>{pokemon.name}</Text>
-    </View>
+    </ScrollView>
   );
 }

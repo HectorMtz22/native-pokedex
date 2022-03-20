@@ -11,7 +11,11 @@ export default function NavigationStack() {
         component={Navigation}
         options={{ headerShown: false }}
       />
-      <Screen name="Pokemon" component={Pokemon} />
+      <Screen
+        name="Pokemon"
+        component={Pokemon}
+        options={{ title: "", headerTransparent: true }}
+      />
     </Navigator>
   );
 }

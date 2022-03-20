@@ -24,6 +24,13 @@ export async function getPokemonDetailsByIdApi(id: number) {
   const url = `${API_HOST}/pokemon/${id}`;
   return fetch(url)
     .then((res) => res.json())
+    .then((res) => ({
+      id: res.id,
+      name: res.name,
+      type: res.types[0].type.name,
+      order: res.order,
+      image: res.sprites.other["official-artwork"].front_default,
+    }))
     .catch((e) => {
       throw e;
     });
