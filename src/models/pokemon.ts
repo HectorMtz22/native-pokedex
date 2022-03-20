@@ -5,6 +5,6 @@ export interface Pokemon {
   name: string;
   image: string;
   order: number;
-  type: PokemonTypeColors;
+  type: PokemonTypeColors[];
   color?: string;
 }
