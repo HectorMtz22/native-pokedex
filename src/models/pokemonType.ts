@@ -19,3 +19,7 @@ export interface PokemonTypeColors {
     | "dark"
     | "fairy";
 }
+
+export type Types = {
+  types: PokemonTypeColors[];
+};
