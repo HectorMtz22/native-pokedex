@@ -13,7 +13,7 @@ import { Pokemon } from "../models/pokemon";
 export default function PokemonCard(pokemon: Pokemon) {
   const navigation = useNavigation();
   const goToPokemon = () => {
-    navigation.navigate("Pokemon");
+    navigation.navigate("Pokemon", { id: pokemon.id });
   };
 
   const bgStyles = {
