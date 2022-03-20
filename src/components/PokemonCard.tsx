@@ -5,12 +5,16 @@ import {
   Image,
   TouchableWithoutFeedback,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import getColorByPokemonType from "../utils/getColorByPokemonType";
 
 import { Pokemon } from "../models/pokemon";
 
 export default function PokemonCard(pokemon: Pokemon) {
-  const goToPokemon = () => {};
+  const navigation = useNavigation();
+  const goToPokemon = () => {
+    navigation.navigate("Pokemon");
+  };
 
   const bgStyles = {
     backgroundColor: getColorByPokemonType(pokemon.type),

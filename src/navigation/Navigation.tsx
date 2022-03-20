@@ -15,6 +15,7 @@ export default function Navigation() {
         component={Favorite}
         options={{
           title: "Favoritos",
+
           tabBarIcon: (props) => <Icon name="heart" {...props} />,
         }}
       />
