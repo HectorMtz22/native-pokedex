@@ -1,4 +1,5 @@
-import { Text, ScrollView } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { ScrollView } from "react-native";
 import Header from "../components/Pokemon/Header";
 import Type from "../components/Pokemon/Type";
 import usePokemonDetail from "../hooks/usePokemonDetail";
@@ -15,6 +16,7 @@ export default function Pokemon(props: any) {
 
   return (
     <ScrollView>
+      <StatusBar style="light" />
       <Header {...pokemon} />
       <Type types={pokemon.type} />
     </ScrollView>
