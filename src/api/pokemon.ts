@@ -31,6 +31,7 @@ export async function getPokemonDetailsByIdApi(id: number) {
         name: res.name,
         type: resTypes,
         order: res.order,
+        stats: res.stats,
         image: res.sprites.other["official-artwork"].front_default,
       };
     })
