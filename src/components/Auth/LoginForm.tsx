@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   View,
   Text,
@@ -8,19 +9,33 @@ import {
 } from "react-native";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { user, userDetails } from "../../utils/userDB";
 
 export default function LoginForm() {
   const formik = useFormik({
     initialValues,
     validationSchema: Yup.object(validationSchema),
     validateOnChange: false,
-    onSubmit: (formValue) => console.log("Enviado"),
+    onSubmit: (formValues) => {
+      if (
+        formValues.username !== user.username ||
+        formValues.password !== formValues.password
+      ) {
+        return setError("El usuario o contraseña no son correctos");
+      } else {
+        return console.log("Enviado");
+      }
+    },
   });
+  const [error, setError] = useState<string | null>(null);
 
   return (
     <View>
       <Text style={styles.title}>Iniciar Sesión</Text>
-      <Text style={styles.error}>{formik.errors.username}</Text>
+      {formik.errors.username && (
+        <Text style={styles.error}>{formik.errors.username}</Text>
+      )}
+      {error && <Text style={styles.error}>{error}</Text>}
       <TextInput
         placeholder="Nombre de usuario"
         style={styles.input}
@@ -29,7 +44,9 @@ export default function LoginForm() {
         onChangeText={(text) => formik.setFieldValue("username", text)}
         autoFocus
       />
-      <Text style={styles.error}>{formik.errors.password}</Text>
+      {formik.errors.password && (
+        <Text style={styles.error}>{formik.errors.password}</Text>
+      )}
       <TextInput
         placeholder="Contraseña"
         autoCapitalize="none"
