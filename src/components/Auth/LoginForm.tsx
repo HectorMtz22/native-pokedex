@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 import { useForm } from "react-hook-form";
-import { user, userDetails } from "../../utils/userDB";
 import InputText from "../InputText";
 import { LoginFormFields } from "../../models/Login";
+import { AuthContext } from "../../context/AuthContext";
+import getUser from "../../api/getUser";
 
 export default function LoginForm() {
   const {
@@ -12,17 +13,15 @@ export default function LoginForm() {
     formState: { errors },
   } = useForm({ defaultValues });
   const [error, setError] = useState<string | null>(null);
+  const { login } = useContext(AuthContext);
 
-  const onSubmit = (formValues: LoginFormFields) => {
-    if (
-      formValues.username !== user.username ||
-      formValues.password !== user.password
-    ) {
-      setError("El usuario o contraseña no son correctos");
-    } else {
-      setError(null);
-      console.log("Enviado");
-    }
+  const onSubmit = async (formValues: LoginFormFields) => {
+    getUser(formValues)
+      .then((res) => {
+        setError(null);
+        login(res);
+      })
+      .catch(() => setError("El usuario o contraseña no son correctos"));
   };
 
   return (
