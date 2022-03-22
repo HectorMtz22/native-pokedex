@@ -5,7 +5,7 @@ import LoginForm from "../components/Auth/LoginForm";
 import { AuthContext } from "../context/AuthContext";
 
 export default function Account() {
-  const { auth } = useContext(AuthContext);
+  const { isAuthenticated } = useContext(AuthContext);
 
-  return <View>{auth ? <UserData /> : <LoginForm />}</View>;
+  return <View>{isAuthenticated ? <UserData /> : <LoginForm />}</View>;
 }
