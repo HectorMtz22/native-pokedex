@@ -14,12 +14,6 @@ export default function Pokemon({ route: { params } }: any) {
   if (error) goBack();
   if (!pokemon || loading) return null;
 
-  useEffect(() => {
-    setOptions({
-      headerRight: () => <Text>asldjkf</Text>,
-    });
-  }, [params]);
-
   return (
     <ScrollView>
       <StatusBar style="light" />
