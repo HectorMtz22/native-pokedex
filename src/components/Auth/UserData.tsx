@@ -2,9 +2,11 @@ import { View, Text, StyleSheet, Button } from "react-native";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import ItemMenu from "../ItemMenu";
+import useFavoriteCounter from "../../hooks/useFavoriteCounter";
 
 export default function UserData() {
   const { auth, logout } = useContext(AuthContext);
+  const { counter } = useFavoriteCounter();
   return (
     <View style={styles.content}>
       <View style={styles.titleBlock}>
@@ -17,7 +19,7 @@ export default function UserData() {
         <ItemMenu title="Nombre" text={`${auth.firstName} ${auth.lastName}`} />
         <ItemMenu title="Username" text={auth.username} />
         <ItemMenu title="Email" text={auth.email} />
-        <ItemMenu title="Total Favoritos" text={`0 Pokemon`} />
+        <ItemMenu title="Total Favoritos" text={`${counter} Pokemon`} />
       </View>
       <Button title="Cerrar Sesión" onPress={logout} />
     </View>
