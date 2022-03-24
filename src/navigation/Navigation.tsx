@@ -9,7 +9,7 @@ const { Navigator, Screen } = createBottomTabNavigator();
 
 export default function Navigation() {
   return (
-    <Navigator>
+    <Navigator initialRouteName="Pokedex">
       <Screen
         name="Favorite"
         component={Favorite}
