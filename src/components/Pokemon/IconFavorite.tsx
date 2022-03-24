@@ -1,5 +1,4 @@
-import FA5 from "react-native-vector-icons/FontAwesome5";
-import FA from "react-native-vector-icons/FontAwesome";
+import Icon from "react-native-vector-icons/FontAwesome5";
 import { View } from "react-native";
 import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
@@ -35,8 +34,6 @@ export default function IconFavorite({ id }: IconFavoriteProps) {
 
   if (!isAuthenticated) return null;
 
-  const Icon = isFav ? FA : FA5;
-
   return (
     <View>
       <Icon
@@ -44,6 +41,7 @@ export default function IconFavorite({ id }: IconFavoriteProps) {
         color="#fff"
         size={20}
         onPress={toggleFavorite}
+        solid={isFav}
         style={{ marginRight: 10 }}
       />
     </View>
