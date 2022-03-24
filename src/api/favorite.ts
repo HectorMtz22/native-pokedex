@@ -3,20 +3,28 @@ import { FAVORITE_STORAGE } from "../utils/constants";
 
 export async function getPokemonsFavoriteApi() {
   return await AsyncStorage.getItem(FAVORITE_STORAGE)
-    .then((res) => {
-      if (res !== null) JSON.parse(res);
-    })
+    // @ts-expect-error
+    .then((res) => JSON.parse(res))
+    .then((res) => res ?? [])
     .catch((e) => {
       throw e;
     });
 }
 
 export async function addPokemonFavoriteApi(id: number) {
-  let favorites = await getPokemonsFavoriteApi();
+  let pokemons = await getPokemonsFavoriteApi();
+  let favorites = [...pokemons];
+  favorites.push(id);
   return await AsyncStorage.setItem(
     FAVORITE_STORAGE,
     JSON.stringify(favorites)
   ).catch((e) => {
+    throw e;
+  });
+}
+
+export async function deleteStorageApi() {
+  return await AsyncStorage.removeItem(FAVORITE_STORAGE).catch((e) => {
     throw e;
   });
 }
