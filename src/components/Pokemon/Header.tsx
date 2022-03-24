@@ -39,7 +39,7 @@ const bgStyles = (color: string) =>
 const styles = StyleSheet.create({
   content: {
     marginHorizontal: 20,
-    marginTop: 40,
+    marginTop: 50,
   },
   header: {
     flexDirection: "row",
