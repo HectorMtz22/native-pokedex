@@ -17,7 +17,7 @@ export default function PokemonCard(pokemon: Pokemon) {
   };
 
   const bgStyles = {
-    backgroundColor: getColorByPokemonType(pokemon.type),
+    backgroundColor: getColorByPokemonType(pokemon.type[0]),
     ...styles.bg,
   };
 

@@ -1,23 +1,16 @@
-import { useEffect, useState } from "react";
 import { View, Text, Button } from "react-native";
-import { getPokemonsFavoriteApi, deleteStorageApi } from "../api/favorite";
+import LoginForm from "../components/Auth/LoginForm";
+import PokemonList from "../components/PokemonList";
+import useFavorite from "../hooks/useFavorite";
 
 export default function Favorite() {
-  const [favorites, setFavorites] = useState([]);
+  const { isAuthenticated, pokemons } = useFavorite();
 
-  const getFav = async () => {
-    const res = await getPokemonsFavoriteApi();
-    console.log(res);
-  };
-
-  const deleteAll = async () => {
-    return await deleteStorageApi();
-  };
+  if (!isAuthenticated) return <LoginForm />;
 
   return (
     <View>
-      <Button title="Envia" onPress={getFav} />
-      <Button title="Borra" onPress={deleteAll} />
+      <PokemonList pokemons={pokemons} isNext={null} loadMore={() => null} />
     </View>
   );
 }

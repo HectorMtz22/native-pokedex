@@ -1,10 +1,18 @@
 import { FlatList, StyleSheet, ActivityIndicator } from "react-native";
+import { Pokemon } from "../models/pokemon";
 import PokemonCard from "./PokemonCard";
-import { usePokemons } from "../hooks/usePokemons";
 
-export default function PokemonList() {
-  const { pokemons, loadMore, isNext } = usePokemons();
+type PokemonListProps = {
+  pokemons: Pokemon[];
+  loadMore: any;
+  isNext: boolean | null;
+};
 
+export default function PokemonList({
+  pokemons,
+  loadMore,
+  isNext,
+}: PokemonListProps) {
   return (
     <FlatList
       data={pokemons}
@@ -15,6 +23,7 @@ export default function PokemonList() {
       contentContainerStyle={styles.FlatList}
       onEndReached={isNext && loadMore}
       onEndReachedThreshold={0.1}
+      // @ts-expect-error
       ListFooterComponent={
         isNext && (
           <ActivityIndicator

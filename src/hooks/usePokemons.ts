@@ -20,10 +20,11 @@ export const usePokemons = () => {
     let pokemonsArray: Pokemon[] = [];
     for await (const pokemon of response.results) {
       const pokemonDetails = await getPokemonDetailsByUrlApi(pokemon.url);
+      let resTypes = pokemonDetails.types.map((item: any) => item.type.name);
       pokemonsArray.push({
         id: pokemonDetails.id,
         name: pokemonDetails.name,
-        type: pokemonDetails.types[0].type.name,
+        type: resTypes,
         order: pokemonDetails.order,
         image: pokemonDetails.sprites.other["official-artwork"].front_default,
       });
