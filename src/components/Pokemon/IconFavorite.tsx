@@ -1,21 +1,41 @@
-import Icon from "react-native-vector-icons/FontAwesome5";
+import FA5 from "react-native-vector-icons/FontAwesome5";
+import FA from "react-native-vector-icons/FontAwesome";
 import { View } from "react-native";
-import { useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { addPokemonFavoriteApi } from "../../api/favorite";
+import {
+  addPokemonFavoriteApi,
+  deletePokemonFavoriteApi,
+  isPokemonFavoriteApi,
+} from "../../api/favorite";
 
 type IconFavoriteProps = {
   id: number;
 };
 
 export default function IconFavorite({ id }: IconFavoriteProps) {
+  const [isFav, setIsFav] = useState(false);
   const { isAuthenticated } = useContext(AuthContext);
 
-  const addFavorite = async () => {
-    await addPokemonFavoriteApi(id);
+  useEffect(
+    // @ts-expect-error
+    () => isPokemonFavoriteApi(id).then((res) => setIsFav(res)),
+    [id]
+  );
+
+  const toggleFavorite = async () => {
+    if (isFav) {
+      await deletePokemonFavoriteApi(id);
+      setIsFav(false);
+    } else {
+      await addPokemonFavoriteApi(id);
+      setIsFav(true);
+    }
   };
 
   if (!isAuthenticated) return null;
+
+  const Icon = isFav ? FA : FA5;
 
   return (
     <View>
@@ -23,7 +43,7 @@ export default function IconFavorite({ id }: IconFavoriteProps) {
         name="heart"
         color="#fff"
         size={20}
-        onPress={addFavorite}
+        onPress={toggleFavorite}
         style={{ marginRight: 10 }}
       />
     </View>

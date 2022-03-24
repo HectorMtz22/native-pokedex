@@ -11,7 +11,8 @@ export async function getPokemonsFavoriteApi() {
     });
 }
 
-export async function isPokemonFavoriteApi(id: number) {
+export async function isPokemonFavoriteApi(id: number): Promise<boolean> {
+  if (typeof id === "undefined") return false;
   const result = await getPokemonsFavoriteApi();
   return result.includes(id);
 }
@@ -29,7 +30,7 @@ export async function addPokemonFavoriteApi(id: number) {
 
 export async function deletePokemonFavoriteApi(id: number) {
   let pokemons = await getPokemonsFavoriteApi();
-  const newPokemons = pokemons.filter((num: number) => num === id);
+  const newPokemons = pokemons.filter((num: number) => num !== id);
   return await AsyncStorage.setItem(
     FAVORITE_STORAGE,
     JSON.stringify(newPokemons)
