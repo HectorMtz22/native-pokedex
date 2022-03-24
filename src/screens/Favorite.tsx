@@ -1,12 +1,12 @@
 import { View, Text, Button } from "react-native";
-import LoginForm from "../components/Auth/LoginForm";
+import NotLogged from "../components/Auth/NotLogged";
 import PokemonList from "../components/PokemonList";
 import useFavorite from "../hooks/useFavorite";
 
 export default function Favorite() {
   const { isAuthenticated, pokemons } = useFavorite();
 
-  if (!isAuthenticated) return <LoginForm />;
+  if (!isAuthenticated) return <NotLogged />;
 
   return (
     <View>
