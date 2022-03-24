@@ -1,4 +1,5 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useCallback, useContext } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 import { getPokemonsFavoriteApi } from "../api/favorite";
 import { getPokemonDetailsByIdApi } from "../api/pokemon";
 import { AuthContext } from "../context/AuthContext";
@@ -8,9 +9,11 @@ export default function useFavorite() {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const { isAuthenticated, auth } = useContext(AuthContext);
 
-  useEffect(() => {
-    getFav().then((res: Pokemon[]) => setPokemons(res));
-  }, [auth]);
+  useFocusEffect(
+    useCallback(() => {
+      getFav().then((res: Pokemon[]) => setPokemons(res));
+    }, [auth])
+  );
 
   const getFav = async () => {
     const pokemonsArray = await getPokemonsFavoriteApi();
@@ -19,7 +22,6 @@ export default function useFavorite() {
     );
     return await Promise.all(res);
   };
-  console.log(pokemons);
 
   return { pokemons, getFav, isAuthenticated };
 }
