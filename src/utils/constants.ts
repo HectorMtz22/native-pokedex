@@ -22,4 +22,4 @@ export const POKEMON_TYPE_COLORS = {
 };
 
 export const FAVORITE_STORAGE = "favorites";
-export const USER_STORAGE = "user";
+export const USER_STORAGE = "use";
