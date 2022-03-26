@@ -22,4 +22,5 @@ export type LoginData = {
 
 export interface RegisterData extends LoginData {
   password: string;
+  confirm?: string;
 }

@@ -24,7 +24,12 @@ export default function RegisterForm() {
   const [error, setError] = useState<string | null>(null);
 
   const onSubmit = async (formValues: RegisterData) => {
-    console.log(formValues);
+    if (formValues.password !== formValues.confirm) {
+      setError("Contraseñas no coinciden");
+      return;
+    }
+
+    setError(null);
   };
 
   return (
@@ -64,6 +69,7 @@ export default function RegisterForm() {
         name={"password"}
         placeholder="Ingresa tu Contraseña"
         autoCapitalize="none"
+        secureTextEntry
       />
       <InputText
         control={control}
@@ -71,6 +77,7 @@ export default function RegisterForm() {
         name={"confirm"}
         placeholder="Verifica tu Contraseña"
         autoCapitalize="none"
+        secureTextEntry
       />
       <View style={styles.button}>
         <Button title="Enviar" onPress={handleSubmit(onSubmit)} />
