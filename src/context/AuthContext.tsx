@@ -3,7 +3,7 @@ import { useState, createContext } from "react";
 import { LoginData } from "../models/Login";
 
 export const AuthContext = createContext({
-  auth: { firstName: "", lastName: "", username: "", email: "" },
+  auth: { firstname: "", lastName: "", username: "", email: "" },
   login: (userData: LoginData) => {},
   logout: () => {},
   isAuthenticated: false,

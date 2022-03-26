@@ -1,4 +1,4 @@
-import { Control, FieldError, FieldValues } from "react-hook-form";
+import { FieldError } from "react-hook-form";
 import { TextInputProps } from "react-native";
 
 export interface LoginInputText extends TextInputProps {
@@ -19,3 +19,8 @@ export type LoginData = {
   lastName: string;
   email: string;
 };
+
+export interface RegisterData extends LoginData {
+  password: string;
+  confirm?: string;
+}

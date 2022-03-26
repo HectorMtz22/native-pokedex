@@ -12,11 +12,11 @@ export default function UserData() {
       <View style={styles.titleBlock}>
         <Text style={styles.title}>Bienvenido,</Text>
         <Text style={styles.title}>
-          {auth.firstName} {auth.lastName}
+          {auth.firstname} {auth.lastName}
         </Text>
       </View>
       <View style={styles.dataContent}>
-        <ItemMenu title="Nombre" text={`${auth.firstName} ${auth.lastName}`} />
+        <ItemMenu title="Nombre" text={`${auth.firstname} ${auth.lastName}`} />
         <ItemMenu title="Username" text={auth.username} />
         <ItemMenu title="Email" text={auth.email} />
         <ItemMenu title="Total Favoritos" text={`${counter} Pokemon`} />

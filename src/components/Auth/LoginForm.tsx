@@ -1,10 +1,12 @@
 import { useState, useContext } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, Button } from "react-native";
 import { useForm } from "react-hook-form";
 import InputText from "../InputText";
 import { LoginFormFields } from "../../models/Login";
 import { AuthContext } from "../../context/AuthContext";
 import getUser from "../../api/getUser";
+import styles from "./formStyles";
+import { getUserApi } from "../../api/user";
 
 export default function LoginForm() {
   const {
@@ -16,12 +18,12 @@ export default function LoginForm() {
   const { login } = useContext(AuthContext);
 
   const onSubmit = async (formValues: LoginFormFields) => {
-    getUser(formValues)
+    await getUserApi(formValues)
       .then((res) => {
         setError(null);
         login(res);
       })
-      .catch(() => setError("El usuario o contraseña no son correctos"));
+      .catch((e) => setError(e.message));
   };
 
   return (
@@ -55,22 +57,3 @@ const defaultValues = {
   username: "",
   password: "",
 };
-
-const styles = StyleSheet.create({
-  title: {
-    textAlign: "center",
-    fontSize: 28,
-    fontWeight: "bold",
-    marginTop: 50,
-    marginBottom: 15,
-  },
-  error: {
-    marginBottom: 10,
-    paddingHorizontal: 20,
-    fontWeight: "bold",
-    color: "#f00",
-  },
-  button: {
-    marginHorizontal: 12,
-  },
-});
