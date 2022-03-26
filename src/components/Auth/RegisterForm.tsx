@@ -1,10 +1,12 @@
-import { View, Text, Button, TextInput } from "react-native";
-import { useState } from "react";
+import { View, Text, Button } from "react-native";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import styles from "./formStyles";
 import InputText from "../InputText";
 import { RegisterData } from "../../models/Login";
+import { addUserApi } from "../../api/user";
+import { AuthContext } from "../../context/AuthContext";
 
 const defaultValues = {
   username: "",
@@ -22,6 +24,7 @@ export default function RegisterForm() {
     formState: { errors },
   } = useForm({ defaultValues });
   const [error, setError] = useState<string | null>(null);
+  const { login } = useContext(AuthContext);
 
   const onSubmit = async (formValues: RegisterData) => {
     if (formValues.password !== formValues.confirm) {
@@ -30,6 +33,12 @@ export default function RegisterForm() {
     }
 
     setError(null);
+    await addUserApi(formValues)
+      .then((res: any) => {
+        setError(null);
+        login(res);
+      })
+      .catch((e) => setError(e.message));
   };
 
   return (

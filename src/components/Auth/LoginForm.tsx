@@ -6,6 +6,7 @@ import { LoginFormFields } from "../../models/Login";
 import { AuthContext } from "../../context/AuthContext";
 import getUser from "../../api/getUser";
 import styles from "./formStyles";
+import { getUserApi } from "../../api/user";
 
 export default function LoginForm() {
   const {
@@ -17,12 +18,12 @@ export default function LoginForm() {
   const { login } = useContext(AuthContext);
 
   const onSubmit = async (formValues: LoginFormFields) => {
-    getUser(formValues)
+    await getUserApi(formValues)
       .then((res) => {
         setError(null);
         login(res);
       })
-      .catch(() => setError("El usuario o contraseña no son correctos"));
+      .catch((e) => setError(e.message));
   };
 
   return (
