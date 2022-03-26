@@ -11,12 +11,15 @@ export default function useFavorite() {
 
   useFocusEffect(
     useCallback(() => {
-      getFav().then((res: Pokemon[]) => setPokemons(res));
+      getFav()
+        .then((res) => res ?? [])
+        .then((res: Pokemon[]) => setPokemons(res));
     }, [auth])
   );
 
   const getFav = async () => {
-    const pokemonsArray = await getPokemonsFavoriteApi();
+    if (!auth) return;
+    const pokemonsArray = await getPokemonsFavoriteApi(auth.email);
     const res = await pokemonsArray.map(
       async (id: number) => await getPokemonDetailsByIdApi(id)
     );
