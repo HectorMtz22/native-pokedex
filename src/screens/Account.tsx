@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { View } from "react-native";
+import { ScrollView } from "react-native";
 import UserData from "../components/Auth/UserData";
 import LoginForm from "../components/Auth/LoginForm";
 import { AuthContext } from "../context/AuthContext";
@@ -13,9 +13,9 @@ export default function Account() {
   if (isAuthenticated) return <UserData />;
 
   return (
-    <View>
+    <ScrollView>
       {isLogin ? <LoginForm /> : <RegisterForm />}
       <MoveBetweenForms isLogin={isLogin} setIsLogin={setIsLogin} />
-    </View>
+    </ScrollView>
   );
 }

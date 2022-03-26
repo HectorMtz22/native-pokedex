@@ -26,7 +26,7 @@ export default function MoveBetweenForms({
 }
 
 const styles = StyleSheet.create({
-  container: { marginTop: 30 },
+  container: { marginTop: 30, marginBottom: 50 },
   titleText: {
     marginVertical: 10,
     fontSize: 16,
