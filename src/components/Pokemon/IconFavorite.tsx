@@ -16,11 +16,9 @@ export default function IconFavorite({ id }: IconFavoriteProps) {
   const [isFav, setIsFav] = useState(false);
   const { isAuthenticated, auth } = useContext(AuthContext);
 
-  useEffect(
-    // @ts-expect-error
-    () => isPokemonFavoriteApi(id).then((res) => setIsFav(res)),
-    [id]
-  );
+  useEffect(() => {
+    isPokemonFavoriteApi(id, auth?.email).then((res) => setIsFav(res));
+  }, [id]);
 
   const toggleFavorite = async () => {
     if (isFav) {
